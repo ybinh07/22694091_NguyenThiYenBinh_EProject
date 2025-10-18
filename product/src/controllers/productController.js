@@ -124,6 +124,22 @@ class ProductController {
     }
   }
 
+   async handleOrderResponse(data) {
+    const { orderId, totalPrice, products, username } = data;
+
+    if (this.ordersMap.has(orderId)) {
+      const order = this.ordersMap.get(orderId);
+      this.ordersMap.set(orderId, {
+        ...order,
+        totalPrice,
+        products,
+        username,
+        status: "completed",
+      });
+    }
+
+    console.log(`✅ Order ${orderId} updated from Order Service`, data);
+  }
 }
 
 module.exports = ProductController;

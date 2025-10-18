@@ -41,7 +41,6 @@ class AuthController {
 
   async getProfile(req, res) {
     const userId = req.user.id;
-
     try {
       const user = await this.authService.getUserById(userId);
       res.json(user);

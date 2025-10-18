@@ -1,11 +1,8 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config");
 
-/**
- * Middleware to verify the token
- */
-
-module.exports = function(req, res, next) {
+module.exports = function (req, res, next) {
+  // Lấy token từ header x-auth-token
   const token = req.header("x-auth-token");
 
   if (!token) {
@@ -13,10 +10,11 @@ module.exports = function(req, res, next) {
   }
 
   try {
+    // Giải mã token
     const decoded = jwt.verify(token, config.jwtSecret);
-    req.user = decoded;
+    req.user = decoded; // Gắn user id vào req.user
     next();
-  } catch (e) {
-    res.status(400).json({ message: "Token is not valid" });
+  } catch (err) {
+    return res.status(400).json({ message: "Invalid token" });
   }
 };

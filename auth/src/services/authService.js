@@ -46,6 +46,9 @@ class AuthService {
     // Delete all users with a username that starts with "test"
     await User.deleteMany({ username: /^test/ });
   }
+  async getUserById(userId){
+    return await this.userRepository.getUserById(userId)
+  }
 }
 
 module.exports = AuthService;

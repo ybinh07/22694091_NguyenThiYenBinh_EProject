@@ -82,7 +82,7 @@ class App {
       } catch (err) {
         console.error("🚫 Failed to connect to RabbitMQ:", err.message);
       }
-    }, 5000); // đợi RabbitMQ khởi động nếu chạy bằng Docker
+    }, 5000); 
   }
 
   start() {
