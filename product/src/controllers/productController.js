@@ -62,7 +62,8 @@ class ProductController {
       await messageBroker.publishMessage("orders", {
         orderId,
         products: products.map(p => p._id), // chỉ gửi _id
-        username: req.user?.username || "guest",
+        user: { id: req.user?.id, username: req.user?.username }
+
       });
 
 
@@ -90,20 +91,27 @@ class ProductController {
     return res.status(200).json(order);
   }
 
-  async getProducts(req, res) {
+    getProducts = async (req, res) => {
     try {
-      const token = req.headers.authorization;
-      if (!token) {
-        return res.status(401).json({ message: "Unauthorized" });
+      const { category, brand, minPrice, maxPrice, page = 1, limit = 20, sort } = req.query;
+      const filter = {};
+      if (category) filter.category = category;
+      if (brand) filter.brand = brand;
+      if (minPrice || maxPrice) {
+        filter.price = {};
+        if (minPrice) filter.price.$gte = Number(minPrice);
+        if (maxPrice) filter.price.$lte = Number(maxPrice);
       }
-
-      const products = await Product.find({});
-      res.status(200).json(products);
-    } catch (error) {
-      console.error(error);
+      const q = Product.find(filter);
+      if (sort) q.sort(sort.replace(":", " "));
+      const items = await q.skip((page - 1) * limit).limit(Number(limit));
+      res.json(items);
+    } catch (e) {
       res.status(500).json({ message: "Server error" });
     }
-  } async getProductInfo(req, res) {
+  };
+  
+  async getProductInfo(req, res) {
     try {
       const { ids } = req.body;
 

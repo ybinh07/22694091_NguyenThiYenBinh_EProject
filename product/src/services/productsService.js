@@ -1,4 +1,4 @@
-const ProductsRepository = require(".repositories/productsRepository");
+const ProductsRepository = require("../repositories/productsRepository");
 
 /**
  * Class that ties together the business logic and the data access layer

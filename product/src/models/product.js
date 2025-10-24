@@ -4,8 +4,10 @@ const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
   price: { type: Number, required: true },
   description: { type: String },
-}, { collection : 'products' });
+  category: { type: String },
+  brand: { type: String },
+  stock: { type: Number, required: true, default: 100 },
+  createdAt: { type: Date, default: Date.now }
+}, { collection: "products" });
 
-const Product = mongoose.model("Product", productSchema);
-
-module.exports = Product;
+module.exports = mongoose.model("Product", productSchema);

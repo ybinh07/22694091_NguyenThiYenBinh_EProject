@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const config = require("./config");
 const authMiddleware = require("./middlewares/authMiddleware");
 const AuthController = require("./controllers/authController");
+const morgan = require("morgan");
+const cors = require("cors");
 
 class App {
   constructor() {
@@ -29,13 +31,19 @@ class App {
   setMiddlewares() {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(cors());
+    this.app.use(morgan("dev"));
   }
 
   setRoutes() {
     this.app.post("/login", (req, res) => this.authController.login(req, res));
     this.app.post("/register", (req, res) => this.authController.register(req, res));
     this.app.get("/dashboard", authMiddleware, (req, res) => res.json({ message: "Welcome to dashboard" }));
-    this.app.get("/profile",authMiddleware,(req,res)=> this.authController.getProfile(req,res))
+    this.app.get("/profile", authMiddleware, (req, res) =>
+      this.authController.profile(req, res)
+    );
+
+
   }
 
   start() {
@@ -43,13 +51,13 @@ class App {
   }
 
   async stop() {
-  if (this.server) {
-    this.server.close();
-    console.log("HTTP server closed");
+    if (this.server) {
+      this.server.close();
+      console.log("HTTP server closed");
+    }
+    await mongoose.disconnect();
+    console.log("MongoDB disconnected");
   }
-  await mongoose.disconnect();
-  console.log("MongoDB disconnected");
-}
 
 }
 

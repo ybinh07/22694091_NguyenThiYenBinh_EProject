@@ -1,21 +1,46 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Order = require("./models/order");
-const amqp = require("amqplib");
-const config = require("./config");
-const axios = require("axios");
+const cors = require("cors");
+const morgan = require("morgan");
+const orderRoutes = require("./routes/orderRoutes");
+const messageBroker = require("./utils/messageBroker");
 
 class App {
   constructor() {
     this.app = express();
-    this.connectDB();
-    this.setupOrderConsumer();
+  }
+
+  middlewares() {
+    this.app.use(cors());
+    this.app.use(morgan("dev"));
+    this.app.use(express.json());
+  }
+
+  routes() {
+    this.app.use("/api/orders", orderRoutes);
   }
 
   async connectDB() {
-    await mongoose.connect(config.mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+    try {
+      await mongoose.connect(process.env.MONGODB_ORDER_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      });
+      console.log("✅ [Order Service] MongoDB connected");
+    } catch (err) {
+      console.error("🚫 MongoDB error:", err.message);
+    }
+  }
+
+  async start() {
+    this.middlewares();
+    this.routes();
+    await this.connectDB();
+    await messageBroker.connect();
+
+    const port = process.env.PORT || 3002;
+    this.server = this.app.listen(port, () => {
+      console.log(`🚀 [Order Service] running on port ${port}`);
     });
     console.log("✅ MongoDB connected (Order Service)");
   }
@@ -94,7 +119,7 @@ class App {
   async stop() {
     if (this.server) this.server.close();
     await mongoose.disconnect();
-    console.log("🛑 Order Service stopped");
+    console.log("🛑 [Order Service] stopped");
   }
 }
 

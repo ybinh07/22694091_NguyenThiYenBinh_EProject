@@ -1,0 +1,64 @@
+version: "3.9"
+
+services:
+  # 🐰 RabbitMQ
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  # 🔐 Auth Service
+  auth:
+    build: ./auth
+    container_name: auth
+    restart: always
+    env_file:
+      - ./auth/.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - rabbitmq
+
+  # 🛍️ Product Service
+  product:
+    build: ./product
+    container_name: product
+    restart: always
+    env_file:
+      - ./product/.env
+    ports:
+      - "3001:3001"
+    depends_on:
+      - rabbitmq
+      - auth
+
+  # 📦 Order Service
+  order:
+    build: ./order
+    container_name: order
+    restart: always
+    env_file:
+      - ./order/.env
+    ports:
+      - "3002:3002"
+    depends_on:
+      - rabbitmq
+      - product
+      - auth
+
+  # 🌐 API Gateway
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    restart: always
+    ports:
+      - "3003:3003"
+    depends_on:
+      - auth
+      - product
+      - order
+
+volumes:
+  mongo_data:

@@ -1,30 +1,65 @@
 const amqp = require("amqplib");
-const config = require("../config");
+require("dotenv").config();
 const OrderService = require("../services/orderService");
 
 class MessageBroker {
-  static async connect() {
+  constructor() {
+    this.channel = null;
+    this.connection = null;
+    this.queueOrders = "orders";
+    this.queueProducts = "products";
+  }
+
+  async connect() {
+    console.log("⏳ [Order Service] Connecting to RabbitMQ...");
     try {
-      const connection = await amqp.connect(config.rabbitMQUrl); // ✅ đổi key
-      const channel = await connection.createChannel();
+      this.connection = await amqp.connect(process.env.RABBITMQ_URI || "amqp://localhost:5672");
+      this.channel = await this.connection.createChannel();
 
-      await channel.assertQueue(config.rabbitMQQueue, { durable: true });
+      await this.channel.assertQueue(this.queueOrders, { durable: true });
+      await this.channel.assertQueue(this.queueProducts, { durable: true });
 
-      channel.consume(config.rabbitMQQueue, async (message) => {
-        try {
-          const order = JSON.parse(message.content.toString());
-          const orderService = new OrderService();
-          await orderService.createOrder(order);
-          channel.ack(message);
-        } catch (error) {
-          console.error(error);
-          channel.reject(message, false);
-        }
-      });
-    } catch (error) {
-      console.error("RabbitMQ connection failed:", error.message);
+      console.log("🐇 [Order Service] Connected to RabbitMQ — listening on 'orders' queue.");
+
+      this.consumeOrders();
+    } catch (err) {
+      console.error("🚫 RabbitMQ connection failed:", err.message);
+    }
+  }
+
+  consumeOrders() {
+    this.channel.consume(this.queueOrders, async (message) => {
+      try {
+        const orderData = JSON.parse(message.content.toString());
+        const orderService = new OrderService();
+
+        const newOrder = await orderService.createOrder(orderData);
+
+        // 🔁 Gửi phản hồi sang Product Service
+        await this.publish(this.queueProducts, {
+          orderId: newOrder._id,
+          totalPrice: newOrder.totalPrice,
+          productIds: newOrder.products
+        });
+
+        console.log(`✅ [Order Service] Processed order ${newOrder._id}`);
+        this.channel.ack(message);
+      } catch (err) {
+        console.error("❌ Error processing message:", err.message);
+        this.channel.nack(message, false, false);
+      }
+    });
+  }
+
+  async publish(queue, payload) {
+    try {
+      if (!this.channel) throw new Error("No RabbitMQ channel available");
+      await this.channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)), { persistent: true });
+      console.log(`📤 Message sent to "${queue}"`, payload);
+    } catch (err) {
+      console.error("❌ Publish error:", err.message);
     }
   }
 }
 
-module.exports = MessageBroker;
+module.exports = new MessageBroker();

@@ -1,59 +1,52 @@
 const amqp = require("amqplib");
+const Product = require("../models/product");
 
 class MessageBroker {
   constructor() {
     this.channel = null;
     this.productController = null;
   }
-
-  setProductController(controller) {
-    this.productController = controller;
-  }
+  setProductController(controller) { this.productController = controller; }
 
   async connect() {
-    console.log("Connecting to RabbitMQ...");
-    try {
-      const connection = await amqp.connect("amqp://localhost:5672");
-      this.channel = await connection.createChannel();
+    console.log("Product Service: connecting to RabbitMQ...");
+    const conn = await amqp.connect(process.env.RABBITMQ_URI || "amqp://localhost:5672");
+    const ch = await conn.createChannel();
+    this.channel = ch;
 
-      await this.channel.assertQueue("orders", { durable: true });
-      await this.channel.assertQueue("products", { durable: true });
+    await ch.assertQueue("orders", { durable: true });
+    await ch.assertQueue("products", { durable: true });
+    console.log("Product Service: queues ready");
 
-      console.log("RabbitMQ connected and queues declared");
+    // Consume responses from Order Service
+    ch.consume("products", async (msg) => {
+      try {
+        const data = JSON.parse(msg.content.toString());
+        const { orderId, totalPrice, productIds } = data;
 
-      // 🟢 Nhận phản hồi từ Order Service
-      this.channel.consume("products", (message) => {
-        const data = JSON.parse(message.content.toString());
-        const { orderId, totalPrice } = data;
-
+        // Update in-memory order status for quick polling
         if (this.productController && this.productController.ordersMap.has(orderId)) {
           const order = this.productController.ordersMap.get(orderId);
-          this.productController.ordersMap.set(orderId, {
-            ...order,
-            ...data,
-            status: "completed",
-          });
-          console.log(`✅ Order ${orderId} completed`);
+          this.productController.ordersMap.set(orderId, { ...order, totalPrice, status: "completed" });
         }
 
-        this.channel.ack(message);
-      });
-    } catch (err) {
-      console.error("Failed to connect to RabbitMQ:", err.message);
-    }
+        // Inventory sync: decrement stock
+        if (Array.isArray(productIds)) {
+          for (const id of productIds) {
+            await Product.findByIdAndUpdate(id, { $inc: { stock: -1 } });
+          }
+        }
+        ch.ack(msg);
+      } catch (e) {
+        console.error("Product consume error:", e.message);
+        ch.nack(msg, false, false);
+      }
+    });
   }
 
   async publishMessage(queue, message) {
-    if (!this.channel) {
-      console.error("No RabbitMQ channel available.");
-      return;
-    }
-    try {
-      await this.channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)));
-      console.log(`📤 Message sent to ${queue}`, message);
-    } catch (err) {
-      console.error("Error publishing message:", err);
-    }
+    if (!this.channel) throw new Error("No RabbitMQ channel");
+    await this.channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)), { persistent: true });
   }
 }
 
