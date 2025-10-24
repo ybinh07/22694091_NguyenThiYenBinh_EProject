@@ -63,8 +63,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/order-service:latest
 
-      # 🚀 8. Deploy lên server (nếu có VPS)
-      # 👉 Nếu chưa có SERVER_IP hoặc SERVER_USER thì workflow vẫn chạy bình thường (bỏ qua bước này)
+      # 🚀 8. Deploy lên server (tùy chọn)
       - name: Deploy with docker-compose
         if: ${{ env.SERVER_IP != '' && env.SERVER_USER != '' }}
         env:
