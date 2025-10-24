@@ -1,6 +1,6 @@
 const amqp = require("amqplib");
 require("dotenv").config();
-const OrderService = require("../services/orderService");
+const orderService = require("../services/orderService");
 
 class MessageBroker {
   constructor() {
@@ -20,7 +20,6 @@ class MessageBroker {
       await this.channel.assertQueue(this.queueProducts, { durable: true });
 
       console.log("🐇 [Order Service] Connected to RabbitMQ — listening on 'orders' queue.");
-
       this.consumeOrders();
     } catch (err) {
       console.error("🚫 RabbitMQ connection failed:", err.message);
@@ -31,15 +30,15 @@ class MessageBroker {
     this.channel.consume(this.queueOrders, async (message) => {
       try {
         const orderData = JSON.parse(message.content.toString());
-        const orderService = new OrderService();
+        console.log("📥 Received order data:", orderData);
 
-        const newOrder = await orderService.createOrder(orderData);
+        // ✅ Gọi service instance trực tiếp
+        const newOrder = await orderService.createOrder(orderData.user.id, orderData.products);
 
-        // 🔁 Gửi phản hồi sang Product Service
         await this.publish(this.queueProducts, {
           orderId: newOrder._id,
           totalPrice: newOrder.totalPrice,
-          productIds: newOrder.products
+          productIds: newOrder.products,
         });
 
         console.log(`✅ [Order Service] Processed order ${newOrder._id}`);

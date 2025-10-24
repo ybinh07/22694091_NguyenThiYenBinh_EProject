@@ -1,7 +1,10 @@
 const axios = require("axios");
 const Order = require("../models/order");
-const messageBroker = require("../utils/messageBroker");
 
+/**
+ * 🛒 Order Service
+ * Xử lý toàn bộ logic nghiệp vụ của đơn hàng.
+ */
 class OrderService {
   /**
    * 🔹 Tạo đơn hàng mới
@@ -11,8 +14,28 @@ class OrderService {
    */
   async createOrder(userId, productIds) {
     try {
+      if (!Array.isArray(productIds) || productIds.length === 0) {
+        throw new Error("Invalid product IDs");
+      }
+
+      console.log("📦 [OrderService] Fetching product info from Product Service...");
+
       // 🔸 Gọi sang Product Service để lấy thông tin sản phẩm
-      const { data: products } = await axios.post(process.env.PRODUCT_SERVICE_URL, { ids: productIds });
+      const response = await axios.post(
+        process.env.PRODUCT_SERVICE_URL,
+        { ids: productIds },
+        {
+          timeout: 5000,
+          headers: {
+            Authorization: process.env.SERVICE_TOKEN, // ✅ gửi token nội bộ
+          },
+        }
+      );
+
+      const products = response.data;
+      if (!products || !Array.isArray(products) || products.length === 0) {
+        throw new Error("No products found from Product Service");
+      }
 
       // 🔸 Tính tổng giá tiền
       const totalPrice = products.reduce((sum, p) => sum + Number(p.price || 0), 0);
@@ -22,17 +45,10 @@ class OrderService {
         userId,
         products: productIds,
         totalPrice,
-        status: "Completed", // đơn giản: hoàn tất sau khi tính tổng
+        status: "Completed", // Đơn giản: hoàn tất sau khi tính tổng
       });
 
-      // 🔸 Gửi message sang Product Service để cập nhật tồn kho
-      await messageBroker.publish("products", {
-        orderId: order._id,
-        totalPrice: order.totalPrice,
-        productIds: order.products,
-      });
-
-      console.log(`✅ [OrderService] Created order ${order._id}`);
+      console.log(`✅ [OrderService] Created order ${order._id} (User: ${userId})`);
       return order;
     } catch (err) {
       console.error("❌ [OrderService] Create order failed:", err.message);
@@ -42,19 +58,38 @@ class OrderService {
 
   /**
    * 🔹 Lấy lịch sử đơn hàng của 1 người dùng
+   * @param {String} userId
    */
   async getUserOrders(userId) {
-    return await Order.find({ userId }).sort({ createdAt: -1 }).lean();
+    try {
+      const orders = await Order.find({ userId }).sort({ createdAt: -1 }).lean();
+      return orders;
+    } catch (err) {
+      console.error("❌ [OrderService] Failed to get user orders:", err.message);
+      throw err;
+    }
   }
 
   /**
    * 🔹 Cập nhật trạng thái đơn hàng
+   * @param {String} orderId
+   * @param {String} status
    */
   async updateOrderStatus(orderId, status) {
-    const order = await Order.findByIdAndUpdate(orderId, { status }, { new: true });
-    if (!order) throw new Error("Order not found");
-    return order;
+    try {
+      const order = await Order.findByIdAndUpdate(
+        orderId,
+        { status },
+        { new: true }
+      );
+      if (!order) throw new Error("Order not found");
+      console.log(`📝 [OrderService] Updated order ${orderId} → ${status}`);
+      return order;
+    } catch (err) {
+      console.error("❌ [OrderService] Update order status failed:", err.message);
+      throw err;
+    }
   }
 }
 
-module.exports = OrderService;
+module.exports = new OrderService();
