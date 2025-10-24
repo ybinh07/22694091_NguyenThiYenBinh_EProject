@@ -6,9 +6,15 @@ on:
       - main
   workflow_dispatch:
 
+concurrency:
+  group: dev
+  cancel-in-progress: false
+
 jobs:
   build-dev-images:
+    name: Build Development Images
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -22,7 +28,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # ✅ Build & Push API Gateway (dev)
       - name: Build & Push API Gateway (dev)
         uses: docker/build-push-action@v5
         with:
@@ -31,7 +36,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/api-gateway:dev
 
-      # ✅ Build & Push Product Service (dev)
       - name: Build & Push Product Service (dev)
         uses: docker/build-push-action@v5
         with:
@@ -40,7 +44,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/product-service:dev
 
-      # ✅ Build & Push Order Service (dev)
       - name: Build & Push Order Service (dev)
         uses: docker/build-push-action@v5
         with:
