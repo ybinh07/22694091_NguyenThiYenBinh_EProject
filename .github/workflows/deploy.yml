@@ -12,22 +12,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 🧩 Lấy code mới nhất
+      # 🧩 1. Lấy code mới nhất
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 🐳 Cài Docker Buildx
+      # 🐳 2. Cài Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # 🔑 Đăng nhập Docker Hub
+      # 🔑 3. Đăng nhập Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 🌐 Build & Push API Gateway
+      # 🌐 4. Build & Push API Gateway
       - name: Build & Push API Gateway
         uses: docker/build-push-action@v5
         with:
@@ -36,7 +36,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/api-gateway:latest
 
-      # 🔐 Build & Push Auth Service
+      # 🔐 5. Build & Push Auth Service
       - name: Build & Push Auth Service
         uses: docker/build-push-action@v5
         with:
@@ -45,7 +45,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/auth-service:latest
 
-      # 🛍️ Build & Push Product Service
+      # 🛍️ 6. Build & Push Product Service
       - name: Build & Push Product Service
         uses: docker/build-push-action@v5
         with:
@@ -54,7 +54,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/product-service:latest
 
-      # 📦 Build & Push Order Service
+      # 📦 7. Build & Push Order Service
       - name: Build & Push Order Service
         uses: docker/build-push-action@v5
         with:
@@ -63,11 +63,15 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/order-service:latest
 
-      # 🚀 Deploy lên server (nếu có)
+      # 🚀 8. Deploy lên server (nếu có VPS)
+      # 👉 Nếu chưa có SERVER_IP hoặc SERVER_USER thì workflow vẫn chạy bình thường (bỏ qua bước này)
       - name: Deploy with docker-compose
-        if: ${{ secrets.SERVER_IP != '' }}
+        if: ${{ env.SERVER_IP != '' && env.SERVER_USER != '' }}
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} '
+          ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP '
             cd /home/user/microservices &&
             docker compose pull &&
             docker compose up -d --force-recreate
