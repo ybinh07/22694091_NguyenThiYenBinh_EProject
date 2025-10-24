@@ -72,9 +72,14 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
       - name: 🧹 Move cache
+        shell: pwsh
         run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+          if (Test-Path "$env:TEMP\.buildx-cache") {
+            Remove-Item -Recurse -Force "$env:TEMP\.buildx-cache"
+          }
+          if (Test-Path "$env:TEMP\.buildx-cache-new") {
+            Rename-Item "$env:TEMP\.buildx-cache-new" ".buildx-cache"
+          }
 
   deploy:
     name: 🚀 Deploy to Local Dev Server

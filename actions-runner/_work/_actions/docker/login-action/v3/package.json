@@ -1,0 +1,52 @@
+{
+  "name": "docker-login",
+  "description": "GitHub Action to login against a Docker registry",
+  "main": "src/main.ts",
+  "scripts": {
+    "build": "ncc build --source-map --minify --license licenses.txt",
+    "lint": "yarn run prettier && yarn run eslint",
+    "format": "yarn run prettier:fix && yarn run eslint:fix",
+    "eslint": "eslint --max-warnings=0 .",
+    "eslint:fix": "eslint --fix .",
+    "prettier": "prettier --check \"./**/*.ts\"",
+    "prettier:fix": "prettier --write \"./**/*.ts\"",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/docker/login-action.git"
+  },
+  "keywords": [
+    "actions",
+    "docker",
+    "login"
+  ],
+  "author": "Docker Inc.",
+  "license": "Apache-2.0",
+  "packageManager": "yarn@4.9.2",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@aws-sdk/client-ecr": "^3.890.0",
+    "@aws-sdk/client-ecr-public": "^3.890.0",
+    "@docker/actions-toolkit": "^0.63.0",
+    "http-proxy-agent": "^7.0.2",
+    "https-proxy-agent": "^7.0.6",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.19.9",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vercel/ncc": "^0.38.3",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-jest": "^28.14.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "jest": "^29.7.0",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
