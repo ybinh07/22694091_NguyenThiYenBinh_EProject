@@ -91,7 +91,7 @@ class ProductController {
     return res.status(200).json(order);
   }
 
-    getProducts = async (req, res) => {
+  getProducts = async (req, res) => {
     try {
       const { category, brand, minPrice, maxPrice, page = 1, limit = 20, sort } = req.query;
       const filter = {};
@@ -110,7 +110,7 @@ class ProductController {
       res.status(500).json({ message: "Server error" });
     }
   };
-  
+
   async getProductInfo(req, res) {
     try {
       const { ids } = req.body;
@@ -132,7 +132,7 @@ class ProductController {
     }
   }
 
-   async handleOrderResponse(data) {
+  async handleOrderResponse(data) {
     const { orderId, totalPrice, products, username } = data;
 
     if (this.ordersMap.has(orderId)) {
@@ -148,6 +148,9 @@ class ProductController {
 
     console.log(`✅ Order ${orderId} updated from Order Service`, data);
   }
+
+
+
 }
 
 module.exports = ProductController;

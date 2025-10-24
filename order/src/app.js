@@ -2,8 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
+const amqp = require("amqplib");
+const axios = require("axios");
 const orderRoutes = require("./routes/orderRoutes");
 const messageBroker = require("./utils/messageBroker");
+const Order = require("./models/order");
+const config = require("../src/config"); 
 
 class App {
   constructor() {
@@ -24,7 +28,7 @@ class App {
     try {
       await mongoose.connect(process.env.MONGODB_ORDER_URI, {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
       });
       console.log("✅ [Order Service] MongoDB connected");
     } catch (err) {
@@ -32,30 +36,12 @@ class App {
     }
   }
 
-  async start() {
-    this.middlewares();
-    this.routes();
-    await this.connectDB();
-    await messageBroker.connect();
-
-    const port = process.env.PORT || 3002;
-    this.server = this.app.listen(port, () => {
-      console.log(`🚀 [Order Service] running on port ${port}`);
-    });
-    console.log("✅ MongoDB connected (Order Service)");
-  }
-
-  async disconnectDB() {
-    await mongoose.disconnect();
-    console.log("🔌 MongoDB disconnected");
-  }
-
   async setupOrderConsumer() {
     console.log("⏳ Connecting to RabbitMQ...");
 
     setTimeout(async () => {
       try {
-        const amqpServer = config.rabbitMQUrl;
+        const amqpServer = config.rabbitMQUrl || process.env.RABBITMQ_URI || "amqp://localhost:5672";
         const connection = await amqp.connect(amqpServer);
         const channel = await connection.createChannel();
         await channel.assertQueue("orders");
@@ -67,34 +53,21 @@ class App {
           console.log("📥 Received ORDER:", { products, username, orderId });
 
           try {
-            // ✅ Gọi API sang Product Service để lấy thông tin chi tiết sản phẩm
-            const response = await axios.post("http://localhost:3001/api/products/info", {
+            const response = await axios.post("http://product:3001/api/products/info", {
               ids: products,
             });
             const productDocs = response.data;
 
-            // ✅ Tính tổng tiền
             const totalPrice = productDocs.reduce((sum, p) => sum + (p.price || 0), 0);
 
-            // ✅ Tạo order mới trong DB của Order Service
-            const newOrder = new Order({
-              products, // chỉ lưu danh sách ObjectId
-              totalPrice,
-            });
-
+            const newOrder = new Order({ products, totalPrice });
             await newOrder.save();
             console.log(`✅ Order ${orderId} saved (${products.length} products)`);
 
-            // ✅ Gửi phản hồi về Product Service
             channel.sendToQueue(
               "products",
               Buffer.from(
-                JSON.stringify({
-                  orderId,
-                  username,
-                  products,
-                  totalPrice,
-                })
+                JSON.stringify({ orderId, username, products, totalPrice })
               )
             );
 
@@ -107,12 +80,19 @@ class App {
       } catch (err) {
         console.error("🚫 Failed to connect to RabbitMQ:", err.message);
       }
-    }, 5000); 
+    }, 5000);
   }
 
-  start() {
-    this.server = this.app.listen(config.port, () =>
-      console.log(`🚀 Order Service running on port ${config.port}`)
+  async start() {
+    this.middlewares();
+    this.routes();
+    await this.connectDB();
+    await messageBroker.connect();
+    this.setupOrderConsumer();
+
+    const port = process.env.PORT || config.port || 3002;
+    this.server = this.app.listen(port, () =>
+      console.log(`🚀 [Order Service] running on port ${port}`)
     );
   }
 

@@ -16,49 +16,35 @@ class App {
   }
 
   async connectDB() {
-    await mongoose.connect(config.mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("MongoDB connected");
-  }
-
-  async disconnectDB() {
-    await mongoose.disconnect();
-    console.log("MongoDB disconnected");
+    try {
+      await mongoose.connect(config.mongoURI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+      console.log("✅ MongoDB connected");
+    } catch (err) {
+      console.error("❌ MongoDB connection failed:", err.message);
+      process.exit(1);
+    }
   }
 
   setMiddlewares() {
     this.app.use(express.json());
-    this.app.use(express.urlencoded({ extended: false }));
     this.app.use(cors());
     this.app.use(morgan("dev"));
   }
 
   setRoutes() {
-    this.app.post("/login", (req, res) => this.authController.login(req, res));
-    this.app.post("/register", (req, res) => this.authController.register(req, res));
-    this.app.get("/dashboard", authMiddleware, (req, res) => res.json({ message: "Welcome to dashboard" }));
-    this.app.get("/profile", authMiddleware, (req, res) =>
-      this.authController.profile(req, res)
-    );
-
-
+    // Auth routes có prefix /api
+    this.app.post("/api/login", (req, res) => this.authController.login(req, res));
+    this.app.post("/api/register", (req, res) => this.authController.register(req, res));
+    this.app.get("/api/profile", authMiddleware, (req, res) => this.authController.getProfile(req, res));
+    this.app.get("/api/dashboard", authMiddleware, (req, res) => res.json({ message: "Welcome to dashboard" }));
   }
 
   start() {
-    this.server = this.app.listen(3000, () => console.log("Server started on port 3000"));
+    this.server = this.app.listen(3000, () => console.log("🚀 Auth Service started on port 3000"));
   }
-
-  async stop() {
-    if (this.server) {
-      this.server.close();
-      console.log("HTTP server closed");
-    }
-    await mongoose.disconnect();
-    console.log("MongoDB disconnected");
-  }
-
 }
 
 module.exports = App;
