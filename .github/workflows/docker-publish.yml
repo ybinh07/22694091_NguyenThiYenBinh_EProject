@@ -22,6 +22,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      # ✅ Build & Push API Gateway (dev)
       - name: Build & Push API Gateway (dev)
         uses: docker/build-push-action@v5
         with:
@@ -30,8 +31,20 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/api-gateway:dev
 
+      # ✅ Build & Push Product Service (dev)
       - name: Build & Push Product Service (dev)
         uses: docker/build-push-action@v5
         with:
           context: ./product
           file: ./product/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/product-service:dev
+
+      # ✅ Build & Push Order Service (dev)
+      - name: Build & Push Order Service (dev)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./order
+          file: ./order/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/order-service:dev
