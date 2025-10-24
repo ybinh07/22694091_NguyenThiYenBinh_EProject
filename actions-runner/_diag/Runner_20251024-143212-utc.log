@@ -1,0 +1,232 @@
+[2025-10-24 14:32:12Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:32:12Z INFO HostContext] Well known config file 'Credentials': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.credentials'
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:32:12Z INFO HostContext] Well known config file 'Runner': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.runner'
+[2025-10-24 14:32:12Z INFO Listener] Runner is built for Windows (X64) - win-x64.
+[2025-10-24 14:32:12Z INFO Listener] RuntimeInformation: Microsoft Windows 10.0.26100.
+[2025-10-24 14:32:12Z INFO Listener] Version: 2.329.0
+[2025-10-24 14:32:12Z INFO Listener] Commit: c76c59996c8fa32e989164a5a695efb12608ae5a
+[2025-10-24 14:32:12Z INFO Listener] Culture: en-US
+[2025-10-24 14:32:12Z INFO Listener] UI Culture: en-US
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:32:12Z INFO Listener] Validating directory permissions for: 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:32:12Z INFO CommandLineParser] Parse
+[2025-10-24 14:32:12Z INFO CommandLineParser] Parsing 5 args
+[2025-10-24 14:32:12Z INFO CommandLineParser] parsing argument
+[2025-10-24 14:32:12Z INFO CommandLineParser] HasArgs: False
+[2025-10-24 14:32:12Z INFO CommandLineParser] Adding Command: configure
+[2025-10-24 14:32:12Z INFO CommandLineParser] parsing argument
+[2025-10-24 14:32:12Z INFO CommandLineParser] HasArgs: True
+[2025-10-24 14:32:12Z INFO CommandLineParser] arg: url
+[2025-10-24 14:32:12Z INFO CommandLineParser] parsing argument
+[2025-10-24 14:32:12Z INFO CommandLineParser] HasArgs: True
+[2025-10-24 14:32:12Z INFO CommandLineParser] Adding option 'url': 'https://github.com/ybinh07/22694091_NguyenThiYenBinh_EProject'
+[2025-10-24 14:32:12Z INFO CommandLineParser] parsing argument
+[2025-10-24 14:32:12Z INFO CommandLineParser] HasArgs: True
+[2025-10-24 14:32:12Z INFO CommandLineParser] arg: token
+[2025-10-24 14:32:12Z INFO CommandLineParser] parsing argument
+[2025-10-24 14:32:12Z INFO CommandLineParser] HasArgs: True
+[2025-10-24 14:32:12Z INFO CommandLineParser] Adding option 'token': '***'
+[2025-10-24 14:32:12Z INFO Listener] Arguments parsed
+[2025-10-24 14:32:12Z INFO Runner] ExecuteCommand
+[2025-10-24 14:32:12Z INFO ConfigurationStore] currentAssemblyLocation: D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin\Runner.Listener.dll
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:32:12Z INFO ConfigurationStore] binPath: D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:32:12Z INFO ConfigurationStore] RootFolder: D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:32:12Z INFO HostContext] Well known config file 'Runner': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.runner'
+[2025-10-24 14:32:12Z INFO ConfigurationStore] ConfigFilePath: D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.runner
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:32:12Z INFO HostContext] Well known config file 'MigratedRunner': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.runner_migrated'
+[2025-10-24 14:32:12Z INFO ConfigurationStore] MigratedConfigFilePath: D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.runner_migrated
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:32:12Z INFO HostContext] Well known config file 'Credentials': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.credentials'
+[2025-10-24 14:32:12Z INFO ConfigurationStore] CredFilePath: D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.credentials
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:32:12Z INFO HostContext] Well known config file 'MigratedCredentials': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.credentials_migrated'
+[2025-10-24 14:32:12Z INFO ConfigurationStore] MigratedCredFilePath: D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.credentials_migrated
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:32:12Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:32:12Z INFO HostContext] Well known config file 'Service': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.service'
+[2025-10-24 14:32:12Z INFO ConfigurationStore] ServiceConfigFilePath: D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.service
+[2025-10-24 14:32:12Z INFO CommandSettings] Flag 'help': 'False'
+[2025-10-24 14:32:12Z INFO CommandSettings] Flag 'version': 'False'
+[2025-10-24 14:32:12Z INFO CommandSettings] Flag 'commit': 'False'
+[2025-10-24 14:32:12Z INFO CommandSettings] Flag 'check': 'False'
+[2025-10-24 14:32:12Z INFO CommandSettings] Command 'configure': 'True'
+[2025-10-24 14:32:12Z INFO Terminal] WRITE LINE: 
+[2025-10-24 14:32:12Z INFO Terminal] WRITE LINE: --------------------------------------------------------------------------------
+[2025-10-24 14:32:12Z INFO Terminal] WRITE LINE: |        ____ _ _   _   _       _          _        _   _                      |
+[2025-10-24 14:32:12Z INFO Terminal] WRITE LINE: |       / ___(_) |_| | | |_   _| |__      / \   ___| |_(_) ___  _ __  ___      |
+[2025-10-24 14:32:12Z INFO Terminal] WRITE LINE: |      | |  _| | __| |_| | | | | '_ \    / _ \ / __| __| |/ _ \| '_ \/ __|     |
+[2025-10-24 14:32:12Z INFO Terminal] WRITE LINE: |      | |_| | | |_|  _  | |_| | |_) |  / ___ \ (__| |_| | (_) | | | \__ \     |
+[2025-10-24 14:32:12Z INFO Terminal] WRITE LINE: |       \____|_|\__|_| |_|\__,_|_.__/  /_/   \_\___|\__|_|\___/|_| |_|___/     |
+[2025-10-24 14:32:12Z INFO Terminal] WRITE LINE: |                                                                              |
+[2025-10-24 14:32:12Z INFO Terminal] WRITE: |                       
+[2025-10-24 14:32:12Z INFO Terminal] WRITE: Self-hosted runner registration
+[2025-10-24 14:32:12Z INFO Terminal] WRITE LINE:                         |
+[2025-10-24 14:32:12Z INFO Terminal] WRITE LINE: |                                                                              |
+[2025-10-24 14:32:12Z INFO Terminal] WRITE LINE: --------------------------------------------------------------------------------
+[2025-10-24 14:32:12Z INFO ConfigurationManager] ConfigureAsync
+[2025-10-24 14:32:12Z INFO CommandSettings] Flag 'generateServiceConfig': 'False'
+[2025-10-24 14:32:12Z INFO ConfigurationStore] IsConfigured()
+[2025-10-24 14:32:12Z INFO ConfigurationStore] IsConfigured: False
+[2025-10-24 14:32:12Z INFO ConfigurationManager] Is configured: False
+[2025-10-24 14:32:12Z INFO CommandSettings] Arg 'url': 'https://github.com/ybinh07/22694091_NguyenThiYenBinh_EProject'
+[2025-10-24 14:32:12Z INFO CommandSettings] Remove url from Arg dictionary.
+[2025-10-24 14:32:12Z INFO CommandSettings] Arg 'token': '***'
+[2025-10-24 14:32:12Z INFO CommandSettings] Remove token from Arg dictionary.
+[2025-10-24 14:32:14Z INFO ConfigurationManager] Http response code: OK from 'POST https://api.github.com/actions/runner-registration' (3D12:29C776:19B75:1FE4B:68FB8DED)
+[2025-10-24 14:32:14Z INFO ConfigurationManager] Using runner-admin flow: False
+[2025-10-24 14:32:14Z INFO ConfigurationManager] cred retrieved via GitHub auth
+[2025-10-24 14:32:14Z INFO RunnerServer] EstablishVssConnection
+[2025-10-24 14:32:14Z INFO RunnerServer] Establish connection with 100 seconds timeout.
+[2025-10-24 14:32:14Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-10-24 14:32:14Z INFO RunnerServer] EstablishVssConnection
+[2025-10-24 14:32:14Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2025-10-24 14:32:14Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-10-24 14:32:14Z INFO RunnerServer] EstablishVssConnection
+[2025-10-24 14:32:14Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2025-10-24 14:32:14Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-10-24 14:32:15Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-10-24 14:32:15Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-10-24 14:32:15Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-10-24 14:32:15Z INFO Terminal] WRITE LINE: 
+[2025-10-24 14:32:15Z INFO ConfigurationManager] Test Connection complete.
+[2025-10-24 14:32:15Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:32:15Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:32:15Z INFO HostContext] Well known config file 'RSACredentials': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.credentials_rsaparams'
+[2025-10-24 14:32:15Z INFO RSAEncryptedFileKeyManager] Creating new RSA key using 2048-bit key length
+[2025-10-24 14:32:15Z INFO RSAEncryptedFileKeyManager] Successfully saved RSA key parameters to file D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.credentials_rsaparams
+[2025-10-24 14:32:16Z INFO CommandSettings] Arg 'runnergroup': ''
+[2025-10-24 14:32:16Z INFO CommandSettings] Flag 'unattended': 'False'
+[2025-10-24 14:32:16Z INFO PromptManager] ReadValue
+[2025-10-24 14:32:16Z INFO Terminal] WRITE: Enter the name of the runner group to add this runner to: 
+[2025-10-24 14:32:16Z INFO Terminal] WRITE: [press Enter for Default] 
+[2025-10-24 14:32:16Z INFO Terminal] READ LINE
+[2025-10-24 14:32:21Z INFO Terminal] Read value: ''
+[2025-10-24 14:32:21Z INFO PromptManager] Falling back to the default: 'Default'
+[2025-10-24 14:32:21Z INFO Terminal] WRITE LINE: 
+[2025-10-24 14:32:21Z INFO ConfigurationManager] Found a self-hosted runner group with id 1 and name Default
+[2025-10-24 14:32:21Z INFO CommandSettings] Flag 'disableupdate': 'False'
+[2025-10-24 14:32:21Z INFO CommandSettings] Flag 'ephemeral': 'False'
+[2025-10-24 14:32:21Z INFO CommandSettings] Arg 'name': ''
+[2025-10-24 14:32:21Z INFO CommandSettings] Flag 'unattended': 'False'
+[2025-10-24 14:32:21Z INFO PromptManager] ReadValue
+[2025-10-24 14:32:21Z INFO Terminal] WRITE: Enter the name of runner: 
+[2025-10-24 14:32:21Z INFO Terminal] WRITE: [press Enter for YBINH] 
+[2025-10-24 14:32:21Z INFO Terminal] READ LINE
+[2025-10-24 14:32:22Z INFO Terminal] Read value: ''
+[2025-10-24 14:32:22Z INFO PromptManager] Falling back to the default: 'YBINH'
+[2025-10-24 14:32:22Z INFO Terminal] WRITE LINE: 
+[2025-10-24 14:32:22Z INFO CommandSettings] Arg 'labels': ''
+[2025-10-24 14:32:22Z INFO CommandSettings] Flag 'unattended': 'False'
+[2025-10-24 14:32:22Z INFO PromptManager] ReadValue
+[2025-10-24 14:32:22Z INFO Terminal] WRITE: This runner will have the following labels: 'self-hosted', 'Windows', 'X64' 
+Enter any additional labels (ex. label-1,label-2): 
+[2025-10-24 14:32:22Z INFO Terminal] WRITE: [press Enter to skip] 
+[2025-10-24 14:32:22Z INFO Terminal] READ LINE
+[2025-10-24 14:32:24Z INFO Terminal] Read value: ''
+[2025-10-24 14:32:24Z INFO Terminal] WRITE LINE: 
+[2025-10-24 14:32:24Z INFO Terminal] WRITE LINE: A runner exists with the same name
+[2025-10-24 14:32:24Z INFO CommandSettings] Flag 'replace': 'False'
+[2025-10-24 14:32:24Z INFO CommandSettings] Flag 'unattended': 'False'
+[2025-10-24 14:32:24Z INFO PromptManager] ReadValue
+[2025-10-24 14:32:24Z INFO Terminal] WRITE: Would you like to replace the existing runner? (Y/N) 
+[2025-10-24 14:32:24Z INFO Terminal] WRITE: [press Enter for N] 
+[2025-10-24 14:32:24Z INFO Terminal] READ LINE
+[2025-10-24 14:32:27Z INFO Terminal] Read value: 'Y'
+[2025-10-24 14:32:27Z INFO CommandSettings] Flag 'disableupdate': 'False'
+[2025-10-24 14:32:27Z INFO CommandSettings] Flag 'no-default-labels': 'False'
+[2025-10-24 14:32:28Z INFO CommandSettings] Flag 'disableupdate': 'False'
+[2025-10-24 14:32:28Z INFO CommandSettings] Flag 'ephemeral': 'False'
+[2025-10-24 14:32:28Z INFO ConfigurationStore] Saving OAuth credential @ D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.credentials
+[2025-10-24 14:32:28Z INFO ConfigurationStore] Credentials Saved.
+[2025-10-24 14:32:28Z INFO ConfigurationManager] Service enforced serverUrlV2: https://broker.actions.githubusercontent.com/
+[2025-10-24 14:32:28Z INFO ConfigurationManager] Service enforced useV2Flow: True
+[2025-10-24 14:32:28Z INFO CommandSettings] Arg 'work': ''
+[2025-10-24 14:32:28Z INFO CommandSettings] Flag 'unattended': 'False'
+[2025-10-24 14:32:28Z INFO PromptManager] ReadValue
+[2025-10-24 14:32:28Z INFO Terminal] WRITE: Enter name of work folder: 
+[2025-10-24 14:32:28Z INFO Terminal] WRITE: [press Enter for _work] 
+[2025-10-24 14:32:28Z INFO Terminal] READ LINE
+[2025-10-24 14:32:29Z INFO Terminal] Read value: ''
+[2025-10-24 14:32:29Z INFO PromptManager] Falling back to the default: '_work'
+[2025-10-24 14:32:29Z INFO ConfigurationStore] Saving runner settings.
+[2025-10-24 14:32:29Z INFO ConfigurationStore] Settings Saved.
+[2025-10-24 14:32:29Z INFO Terminal] WRITE LINE: 
+[2025-10-24 14:32:29Z INFO Terminal] WRITE LINE: 
+[2025-10-24 14:32:29Z INFO CommandSettings] Flag 'runasservice': 'False'
+[2025-10-24 14:32:29Z INFO CommandSettings] Flag 'unattended': 'False'
+[2025-10-24 14:32:29Z INFO PromptManager] ReadValue
+[2025-10-24 14:32:29Z INFO Terminal] WRITE: Would you like to run the runner as service? (Y/N) 
+[2025-10-24 14:32:29Z INFO Terminal] WRITE: [press Enter for N] 
+[2025-10-24 14:32:29Z INFO Terminal] READ LINE
+[2025-10-24 14:32:33Z INFO Terminal] Read value: 'Y'
+[2025-10-24 14:32:33Z INFO ConfigurationManager] Configuring to run the agent as service
+[2025-10-24 14:32:33Z INFO CommandSettings] Arg 'windowslogonaccount': ''
+[2025-10-24 14:32:33Z INFO CommandSettings] Flag 'unattended': 'False'
+[2025-10-24 14:32:33Z INFO PromptManager] ReadValue
+[2025-10-24 14:32:33Z INFO Terminal] WRITE: User account to use for the service 
+[2025-10-24 14:32:33Z INFO Terminal] WRITE: [press Enter for NT AUTHORITY\NETWORK SERVICE] 
+[2025-10-24 14:32:33Z INFO Terminal] READ LINE
+[2025-10-24 14:33:19Z INFO Terminal] Read value: ''
+[2025-10-24 14:33:19Z INFO PromptManager] Falling back to the default: 'NT AUTHORITY\NETWORK SERVICE'
+[2025-10-24 14:33:19Z INFO WindowsServiceControlManager] LogonAccount after transforming: NT AUTHORITY\NETWORK SERVICE, user: NETWORK SERVICE, domain: NT AUTHORITY
+[2025-10-24 14:33:19Z INFO WindowsServiceControlManager] Service name 'actions.runner.ybinh07-22694091_NguyenThiYenBinh_EProject.YBINH' display name 'GitHub Actions Runner (ybinh07-22694091_NguyenThiYenBinh_EProject.YBINH)' will be used for service configuration.
+[2025-10-24 14:33:19Z INFO WindowsServiceControlManager] Verifying if the account has LogonAsService permission
+[2025-10-24 14:33:19Z INFO WindowsServiceControlManager] Account: NT AUTHORITY\NETWORK SERVICE already has Logon As Service Privilege.
+[2025-10-24 14:33:19Z INFO WindowsServiceControlManager] Create local group and grant folder permission to service logon account.
+[2025-10-24 14:33:19Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:33:19Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:33:19Z INFO ConfigurationStore] Read setting file: 411 chars
+[2025-10-24 14:33:19Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:33:19Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:33:19Z INFO HostContext] Well known directory 'Work': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\_work'
+[2025-10-24 14:33:19Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:33:19Z INFO NativeWindowsServiceHelper] Calculated unique group name GITHUB_ActionsRunner_G66aac
+[2025-10-24 14:33:19Z INFO NativeWindowsServiceHelper] Trying to create group GITHUB_ActionsRunner_G66aac
+[2025-10-24 14:33:19Z INFO NativeWindowsServiceHelper] Local Group 'GITHUB_ActionsRunner_G66aac' created
+[2025-10-24 14:33:19Z INFO NativeWindowsServiceHelper] Trying to add userName NT AUTHORITY\NETWORK SERVICE to the group GITHUB_ActionsRunner_G66aac
+[2025-10-24 14:33:19Z INFO NativeWindowsServiceHelper] Account 'NT AUTHORITY\NETWORK SERVICE' is added to local group 'GITHUB_ActionsRunner_G66aac'.
+[2025-10-24 14:33:19Z INFO NativeWindowsServiceHelper] Set full access control to group for the folder D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner
+[2025-10-24 14:33:19Z INFO NativeWindowsServiceHelper] Set full access control to group for the folder D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\_work
+[2025-10-24 14:33:19Z INFO NativeWindowsServiceHelper] Local group 'GITHUB_ActionsRunner_G66aac' already has full control to path 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\_work'.
+[2025-10-24 14:33:19Z INFO Terminal] WRITE LINE: Granting file permissions to 'NT AUTHORITY\NETWORK SERVICE'.
+[2025-10-24 14:33:19Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:33:19Z INFO ProcessInvokerWrapper] Starting process:
+[2025-10-24 14:33:19Z INFO ProcessInvokerWrapper]   File name: '"D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin\RunnerService.exe"'
+[2025-10-24 14:33:19Z INFO ProcessInvokerWrapper]   Arguments: 'init'
+[2025-10-24 14:33:19Z INFO ProcessInvokerWrapper]   Working directory: ''
+[2025-10-24 14:33:19Z INFO ProcessInvokerWrapper]   Require exit code zero: 'True'
+[2025-10-24 14:33:19Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2025-10-24 14:33:19Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2025-10-24 14:33:19Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2025-10-24 14:33:19Z INFO ProcessInvokerWrapper]   Persist current code page: 'False'
+[2025-10-24 14:33:19Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2025-10-24 14:33:19Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2025-10-24 14:33:20Z INFO ProcessInvokerWrapper] Process started with process id 14700, waiting for process exit.
+[2025-10-24 14:33:20Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-10-24 14:33:20Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2025-10-24 14:33:20Z INFO ProcessInvokerWrapper] Finished process 14700 with exit code 0, and elapsed time 00:00:01.1096843.
+[2025-10-24 14:33:20Z INFO Terminal] WRITE LINE: Service actions.runner.ybinh07-22694091_NguyenThiYenBinh_EProject.YBINH successfully installed
+[2025-10-24 14:33:20Z INFO Terminal] WRITE LINE: Service actions.runner.ybinh07-22694091_NguyenThiYenBinh_EProject.YBINH successfully set recovery option
+[2025-10-24 14:33:20Z INFO Terminal] WRITE LINE: Service actions.runner.ybinh07-22694091_NguyenThiYenBinh_EProject.YBINH successfully set to delayed auto start
+[2025-10-24 14:33:20Z INFO Terminal] WRITE LINE: Service actions.runner.ybinh07-22694091_NguyenThiYenBinh_EProject.YBINH successfully configured
+[2025-10-24 14:33:20Z INFO HostContext] Well known directory 'Bin': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\bin'
+[2025-10-24 14:33:20Z INFO HostContext] Well known directory 'Root': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner'
+[2025-10-24 14:33:20Z INFO HostContext] Well known config file 'Service': 'D:\document\hoc\LTHDV\EProject-Phase-1\22694091_NguyenThiYenBinh_EProject\actions-runner\.service'
+[2025-10-24 14:33:20Z INFO WindowsServiceControlManager] Configuration was successful, trying to start the service
+[2025-10-24 14:33:21Z INFO Terminal] WRITE LINE: Waiting for service to start...
+[2025-10-24 14:33:21Z INFO Terminal] WRITE LINE: Service actions.runner.ybinh07-22694091_NguyenThiYenBinh_EProject.YBINH started successfully
+[2025-10-24 14:33:21Z INFO Listener] Runner execution has finished with return code 0

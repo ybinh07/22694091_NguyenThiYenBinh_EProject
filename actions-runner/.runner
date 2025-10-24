@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 2,
+  "agentName": "YBINH",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus10.actions.githubusercontent.com/WJS5UPUw92Mno211VHt0ORvI14TN0ZJeoUdbB6kpUpxlKu7XKK/",
+  "gitHubUrl": "https://github.com/ybinh07/22694091_NguyenThiYenBinh_EProject",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}

@@ -1,4 +1,4 @@
-name: 🐳 Build & Push Docker Images (Dev)
+name: 🐳 Build & Deploy Docker Images (Self-Hosted)
 
 on:
   push:
@@ -11,23 +11,23 @@ concurrency:
 
 jobs:
   build-and-push:
-    name: Build & Push (api-gateway, product, order)
-    runs-on: ubuntu-latest
+    name: 🧱 Build & Push (api-gateway, product, order)
+    runs-on: self-hosted   # 👉 chạy trên runner của ông xã (máy local)
 
     steps:
-      - name: Checkout repository
+      - name: 🧾 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Log in to Docker Hub
+      - name: 🔐 Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set up Docker Buildx
+      - name: 🛠 Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Configure build cache
+      - name: ⚡ Configure build cache
         uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
@@ -35,7 +35,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      - name: Build & Push API Gateway (dev)
+      - name: 🧩 Build & Push API Gateway
         uses: docker/build-push-action@v5
         with:
           context: ./api-gateway
@@ -47,7 +47,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
-      - name: Build & Push Product Service (dev)
+      - name: 🧩 Build & Push Product Service
         uses: docker/build-push-action@v5
         with:
           context: ./product
@@ -59,7 +59,7 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
-      - name: Build & Push Order Service (dev)
+      - name: 🧩 Build & Push Order Service
         uses: docker/build-push-action@v5
         with:
           context: ./order
@@ -71,38 +71,31 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
-      - name: Move cache
+      - name: 🧹 Move cache
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-
   deploy:
-    name: 🚀 Deploy to Dev Server
-    runs-on: ubuntu-latest
+    name: 🚀 Deploy to Local Dev Server
+    runs-on: self-hosted   # 👉 cũng chạy trên máy ông xã luôn
     needs: build-and-push
 
     steps:
-      - name: Checkout repository
+      - name: 🧾 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.1.0
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd ~/EProject-Phase-1
-            echo "🧹 Pulling latest images..."
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/api-gateway:dev
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/product-service:dev
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/order-service:dev
+      - name: 🐳 Deploy Docker Compose stack
+        run: |
+          echo "🧹 Stopping old containers..."
+          docker compose down || true
 
-            echo "🧰 Stopping old containers..."
-            docker compose down
+          echo "🧰 Pulling latest images..."
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/api-gateway:dev
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/product-service:dev
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/order-service:dev
 
-            echo "🚀 Starting new containers..."
-            docker compose up -d
+          echo "🚀 Starting new containers..."
+          docker compose up -d
 
-            echo "✅ Deployment completed!"
+          echo "✅ Deployment completed successfully!"
